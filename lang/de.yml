@@ -1,0 +1,8 @@
+de:
+  Video:
+    DURATION_UNKNOWN: 'unbekannt'
+    Mp4Type: 'MP4-Video'
+    OgvType: 'OGV-Video'
+    WebMType: 'WebM-Video'
+    DURATION: Dauer
+    TAG_MESSAGE: 'Ihr Browser unterstützt das <code>video</code>-Element nicht.'
