@@ -1,0 +1,11 @@
+File:
+  class_for_file_extension:
+    mpeg: Video
+    mpg: Video
+    mp4: Video
+    mpe: Video
+    vob: Video
+    avi: Video
+    wmv: Video
+    webm: Video
+    flv: Video
