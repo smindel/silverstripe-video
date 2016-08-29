@@ -42,8 +42,9 @@ class Video extends File implements Flushable
         $dir = dirname($path);
         $base = basename($path);
         $placeholdername = $dir . '/_resampled/' . $base . '.png';
-        if (!file_exists($placeholdername)) {
-            $this->getBackend()->generateImage(Director::baseFolder() . DIRECTORY_SEPARATOR . $placeholdername);
+        $fullname = Director::baseFolder() . DIRECTORY_SEPARATOR . $placeholdername;
+        if (!file_exists($fullname)) {
+            $this->getBackend()->generateImage($fullname);
         }
         return Image_Cached::create(
             $placeholdername,
