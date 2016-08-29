@@ -1,8 +1,8 @@
 <?php
 
 class FFmpeg extends Object implements Video_Backend
-{
-    private static $ffmpeg_path = 'ffmpeg';
+{  
+    private static $ffmpeg_path = '/usr/bin/ffmpeg';
 
     protected $original_video_name;
 

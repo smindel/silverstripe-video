@@ -199,4 +199,14 @@ class Video extends File implements Flushable
 
         parent::onBeforeDelete();
     }
+
+    public function requireDefaultRecords()
+    {
+        parent::requireDefaultRecords();
+
+        $output = $return = false;
+        $cmd = Config::inst()->get('FFmpeg', 'ffmpeg_path');
+        exec($cmd . ' 2>&1', $output, $return);
+		DB::alteration_message($output[0], $return == 1 ? 'created' : 'error');
+    }
 }

@@ -5,4 +5,4 @@ de:
     OgvType: 'OGV-Video'
     WebMType: 'WebM-Video'
     DURATION: Dauer
-    TAG_MESSAGE: 'Ihr Browser unterstützt das <code>video</code>-Element nicht.'
+    TAG_MESSAGE: 'Das <code>video</code>-Element wird nicht von Ihrem Browser unterstützt.'
