@@ -156,8 +156,6 @@ class Video extends File implements Flushable
     public function setHeight($height) { $this->setAttribute('height', $height); return $this; }
     public function setSize($width, $height) { $this->setAttribute('width', $width); $this->setAttribute('height', $height); return $this; }
     public function poster()   { $this->setAttribute('poster',   $this->PlaceholderImage->Filename); return $this; }
-    public function rep() { unlink($this->PlaceholderImage->getFullPath()); __('unlinked'); }
-    public function rip() { $this->PlaceholderImage->delete(); __('unlinked'); }
 
 
 
