@@ -2,7 +2,7 @@
 
 class FFmpeg extends Object implements Video_Backend
 {
-    private static $ffmpeg_path = '/opt/local/bin/ffmpeg';
+    private static $ffmpeg_path = 'ffmpeg';
 
     protected $original_video_name;
 
@@ -81,5 +81,5 @@ class FFmpeg extends Object implements Video_Backend
         return $output;
     }
 
-	public function onBeforeDelete() {}
+    public function onBeforeDelete() {}
 }
