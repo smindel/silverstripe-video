@@ -1,8 +1,15 @@
 <?php
 
 class FFmpeg extends Object implements Video_Backend
-{  
-    private static $ffmpeg_path = '/usr/bin/ffmpeg';
+{
+    // setup the FFMPEG backup in your mysite/_config/config.yml
+    private static $ffmpeg_path = '/usr/bin/ffmpeg';    // path to ffmpeg binary
+                                                        // if you don't have ffmpeg installed, you can
+                                                        // download static builds to the thirdparty folder
+    private static $log_file = '.ffmpeg.log';           // log file name, path relative to assets folder
+    private static $log_level = 0;                      // 0 = log nothing,
+                                                        // 1 = command and return code
+                                                        // 2 = verbose
 
     protected $original_video_name;
 
@@ -73,12 +80,26 @@ class FFmpeg extends Object implements Video_Backend
         }
         $cmd .= ' 2>&1';
         $out = exec($cmd, $output, $return);
-        file_put_contents(
-            ASSETS_PATH . DIRECTORY_SEPARATOR . '.ffmpeg.log',
-            date('c') . "\t" . $cmd . " ($return)\n\t" . implode("\n\t", $output) . "\n\n\t" . $out . "\n",
-            FILE_APPEND
-        );
+        $logfile = $this->config()->get('log_file');
+        $loglevel = $this->config()->get('log_level');
+        if ($loglevel) {
+            $message = date('c') . "\t" . $cmd . " ($return)";
+            if ($loglevel > 1) $message .= "\n\t" . implode("\n\t", $output);
+            file_put_contents(
+                ASSETS_PATH . DIRECTORY_SEPARATOR . $logfile,
+                $message . "\n",
+                FILE_APPEND
+            );
+        }
         return $output;
+    }
+
+    public function onBuild()
+    {
+        $output = $return = false;
+        $cmd = $this->config()->get('ffmpeg_path');
+        exec($cmd . ' 2>&1', $output, $return);
+        DB::alteration_message($output[0], $return == 1 ? 'created' : 'error');
     }
 
     public function onBeforeDelete() {}
