@@ -72,10 +72,10 @@ class FFmpeg extends Object implements Video_Backend
         $return = null;
         $cmd = $this->config()->get('ffmpeg_path');
         foreach ($infile_options as $key => $val) $cmd .= ' -' . $key . ' ' . $val;
-        $cmd .= ' -i ' . $infile;
+        $cmd .= ' -i ' . escapeshellarg($infile);
         foreach ($outfile_options as $key => $val) $cmd .= ' -' . $key . ' ' . $val;
         if ($outfile) {
-            $cmd .= ' ' . $outfile;
+            $cmd .= ' ' . escapeshellarg($outfile);
             if (!file_exists(dirname($outfile))) mkdir(dirname($outfile));
         }
         $cmd .= ' 2>&1';
